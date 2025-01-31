@@ -69,7 +69,7 @@
                                 <div id="screenshot-container" class="relative flex w-full flex-1 items-stretch">
                                     <div style="overflow-x: auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
                                         {{-- <livewire:product-list-table />    --}}
-                                        @livewire('product-list-table')
+                                        @livewire('datatable-product')
                                         {{-- <table style="width: 100%; border-collapse: collapse;">
                                             <thead style="background-color: #18181b;">
                                                 <tr>

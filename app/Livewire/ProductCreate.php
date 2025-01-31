@@ -16,14 +16,22 @@ class ProductCreate extends Component
 
     public function submit()
     {
-        $validatedData = $this->validate([
+        $this->validate([
             'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
             'detail' => 'nullable|string',
-            'price' => 'required|numeric|min:0'
         ]);
-        $product = Product::create($validatedData);
-        // $info($this->name);
-        $this->reset(['name', 'detail', 'price']);
-        session()->flash('message', 'Sản phẩm đã được tạo thành công!');
+
+        Product::create([
+            'name' => $this->name,
+            'price' => $this->price,
+            'detail' => $this->detail,
+        ]);
+
+        // Reset input fields
+        $this->reset(['name', 'price', 'detail']);
+
+        // Gửi event productAdded để cập nhật danh sách
+        $this->dispatch('productAdded');
     }
 }
