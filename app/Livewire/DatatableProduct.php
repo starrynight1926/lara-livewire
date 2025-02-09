@@ -23,5 +23,15 @@ class DatatableProduct extends Component
         $products = Product::orderBy('id', 'desc')->paginate(5);
         return view('livewire.datatable-product', compact('products'));
     }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+
+        if ($product) {
+            $product->delete();
+            $this->dispatch('productDeleted'); // Gửi sự kiện cập nhật danh sách
+        }
+    }
 }
 

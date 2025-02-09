@@ -14,6 +14,15 @@ class ProductCreate extends Component
         return view('livewire.product-create');
     }
 
+    // Lắng nghe sự kiện productDeleted để cập nhật danh sách sản phẩm
+    protected $listeners = ['productDeleted' => 'refreshTable'];
+
+    // Hàm refresh lại danh sách sản phẩm khi có sản phẩm bị xóa
+    public function refreshTable()
+    {
+        $this->dispatch('productAdded');
+    }
+
     public function submit()
     {
         $this->validate([
