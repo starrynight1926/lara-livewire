@@ -26,7 +26,7 @@
     </table>
 
     <!-- Pagination -->
-    <div class="mt-4">
+    <div class="mt-4 flex justify-center">
         {{ $products->links() }}
     </div>
 </div>

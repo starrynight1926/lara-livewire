@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Products;
 
 use Livewire\Component;
 use App\Models\Product;
@@ -11,7 +11,7 @@ class ProductCreate extends Component
 
     public function render()
     {
-        return view('livewire.product-create');
+        return view('livewire.products.product-create');
     }
 
     // Lắng nghe sự kiện productDeleted để cập nhật danh sách sản phẩm

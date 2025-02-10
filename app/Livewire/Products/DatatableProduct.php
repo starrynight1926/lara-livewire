@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Products;
 
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -10,7 +10,7 @@ class DatatableProduct extends Component
 {
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'tailwind';
     protected $listeners = ['productAdded' => 'refreshList'];
 
     public function refreshList()
@@ -21,7 +21,7 @@ class DatatableProduct extends Component
     public function render()
     {
         $products = Product::orderBy('id', 'desc')->paginate(5);
-        return view('livewire.datatable-product', compact('products'));
+        return view('livewire.products.datatable-product', compact('products'));
     }
 
     public function delete($id)
