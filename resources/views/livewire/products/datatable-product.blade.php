@@ -30,3 +30,4 @@
         {{ $products->links() }}
     </div>
 </div>
+

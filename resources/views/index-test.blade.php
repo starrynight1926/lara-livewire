@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý sản phẩm</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-       
-    </style>
+    @livewireStyles
 </head>
 <body class="bg-gray-100 p-6">
     <div class="flex flex-col items-center p-6 space-y-6">
@@ -15,10 +13,14 @@
         
         <div class="w-4/5 p-4 shadow rounded-lg">
             @livewire('products.product-create')
-           
         </div>
         
         @livewire('products.datatable-product')
+
+        <div class="w-4/5 p-4 shadow rounded-lg">
+            @livewire('products.product-edit')
+        </div>
     </div>
+    @livewireScripts
 </body>
 </html>
