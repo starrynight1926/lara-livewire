@@ -4,34 +4,44 @@ namespace App\Livewire\Products;
 
 use Livewire\Component;
 use App\Models\Product;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductEdit extends Component
 {
-    public $product;
+    public Product $productEdit; // Khai báo biến public
 
     protected $listeners = ['editProduct' => 'loadProduct'];
 
     public function mount()
     {
-        $this->product = new Product(); // Khởi tạo đối tượng Product mặc định
+        $this->productEdit = new Product(['id' => null]); // Khởi tạo với id là null
     }
 
-    public function loadProduct(Product $product)
+    public function loadProduct($productId)
     {
-        $this->product = $product;
+        logger("Loading product with ID: $productId"); // Debug log
+        try {
+            $this->productEdit = Product::findOrFail($productId); // Tìm sản phẩm theo ID
+            logger("Product loaded: " . json_encode($this->productEdit->toArray())); // Debug log
+            $this->render(); // Render lại view
+        } catch (ModelNotFoundException $e) {
+            session()->flash('error', 'Product not found!');
+            $this->productEdit = new Product(); // Reset product
+        }
     }
 
     public function save()
     {
         $this->validate([
-            'product.name' => 'required|string|max:255',
-            'product.price' => 'required|numeric',
-            'product.detail' => 'required|string',
+            'productEdit.name' => 'required|string|max:255', // Validate dữ liệu
+            'productEdit.price' => 'required|numeric',
+            'productEdit.detail' => 'required|string',
         ]);
 
-        $this->product->save();
+        $this->productEdit->save(); // Lưu thay đổi
 
-        $this->dispatch('productUpdated'); // Gửi sự kiện cập nhật danh sách
+        session()->flash('message', 'Product updated successfully!');
+        $this->dispatch('productUpdated'); // Gửi sự kiện Livewire
     }
 
     public function render()

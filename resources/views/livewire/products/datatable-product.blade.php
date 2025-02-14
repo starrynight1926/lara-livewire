@@ -1,3 +1,4 @@
+<!-- filepath: /F:/Laragon/www/lara-livewire/resources/views/livewire/products/datatable-product.blade.php -->
 <div>
     <table style="width: 100%; border-collapse: collapse;">
         <thead style="background-color: #18181b; color: white;">
@@ -29,5 +30,6 @@
     <div class="mt-4 flex justify-center">
         {{ $products->links() }}
     </div>
-</div>
 
+    
+</div>

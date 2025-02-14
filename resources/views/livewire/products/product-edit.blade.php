@@ -1,19 +1,43 @@
-<div class="p-4 bg-white shadow rounded-lg">
-    @if($product->exists)
+<div>
+    @if (isset($productEdit->id)) <!-- Kiểm tra xem $productEdit->id có tồn tại không -->
         <form wire:submit.prevent="save">
+            <!-- Trường Name -->
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" name="name" id="name" wire:model="product.name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="name" class="block text-gray-700">Name</label>
+                <input 
+                    type="text" 
+                    wire:model="productEdit.name"
+                    id="name" 
+                    class="w-full px-3 py-2 border rounded" 
+                >
+                @error('productEdit.name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
+
+            <!-- Trường Price -->
             <div class="mb-4">
-                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                <input type="text" name="price" id="price" wire:model="product.price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <label for="price" class="block text-gray-700">Price</label>
+                <input 
+                    type="number" 
+                    wire:model="productEdit.price"
+                    id="price" 
+                    class="w-full px-3 py-2 border rounded" 
+                >
+                @error('productEdit.price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
+
+            <!-- Trường Detail -->
             <div class="mb-4">
-                <label for="detail" class="block text-sm font-medium text-gray-700">Detail</label>
-                <textarea id="detail" name="detail" wire:model="product.detail" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                <label for="detail" class="block text-gray-700">Detail</label>
+                <textarea 
+                    wire:model="productEdit.detail"
+                    id="detail" 
+                    class="w-full px-3 py-2 border rounded"
+                ></textarea>
+                @error('productEdit.detail') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+
+            <!-- Nút Save -->
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Save</button>
         </form>
     @endif
 </div>

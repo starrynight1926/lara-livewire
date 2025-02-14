@@ -7,40 +7,29 @@ use App\Models\Product;
 
 class ProductCreate extends Component
 {
-    public $name, $price, $detail;
+    public Product $newProduct; // Biến riêng cho form create
+
+    public function mount()
+    {
+        $this->newProduct = new Product(); // Khởi tạo đối tượng mới
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'newProduct.name' => 'required|string|max:255', // Validate dữ liệu
+            'newProduct.price' => 'required|numeric',
+            'newProduct.detail' => 'required|string',
+        ]);
+
+        $this->newProduct->save(); // Lưu sản phẩm mới
+
+        session()->flash('message', 'Product created successfully!');
+        $this->dispatch('productCreated'); // Gửi sự kiện Livewire
+    }
 
     public function render()
     {
         return view('livewire.products.product-create');
-    }
-
-    // Lắng nghe sự kiện productDeleted để cập nhật danh sách sản phẩm
-    protected $listeners = ['productDeleted' => 'refreshTable'];
-
-    // Hàm refresh lại danh sách sản phẩm khi có sản phẩm bị xóa
-    public function refreshTable()
-    {
-        $this->dispatch('productAdded');
-    }
-
-    public function submit()
-    {
-        $this->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'detail' => 'nullable|string',
-        ]);
-
-        Product::create([
-            'name' => $this->name,
-            'price' => $this->price,
-            'detail' => $this->detail,
-        ]);
-
-        // Reset input fields
-        $this->reset(['name', 'price', 'detail']);
-
-        // Gửi event productAdded để cập nhật danh sách
-        $this->dispatch('productAdded');
     }
 }

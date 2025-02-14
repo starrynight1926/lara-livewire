@@ -13,8 +13,6 @@ class DatatableProduct extends Component
     protected $paginationTheme = 'tailwind';
     protected $listeners = ['productAdded' => 'refreshList', 'productUpdated' => 'refreshList', 'productDeleted' => 'refreshList'];
 
-    public $editingProduct;
-
     public function refreshList()
     {
         // Khi có sản phẩm mới, component sẽ tự động cập nhật danh sách
@@ -26,24 +24,9 @@ class DatatableProduct extends Component
         return view('livewire.products.datatable-product', compact('products'));
     }
 
-    public function edit($id)
+    public function edit($productId)
     {
-        $product = Product::find($id);
-        $this->dispatch('editProduct', $product); // Gửi sự kiện để mở form chỉnh sửa
-    }
-
-    public function updateProduct($id, $data)
-    {
-        $product = Product::find($id);
-
-        if ($product) {
-            $product->name = $data['name'];
-            $product->price = $data['price'];
-            $product->detail = $data['detail'];
-            $product->save();
-
-            $this->dispatch('productUpdated'); // Gửi sự kiện cập nhật danh sách
-        }
+        $this->dispatch('editProduct', productId: $productId); // Gửi sự kiện đến ProductEdit Component
     }
 
     public function delete($id)
