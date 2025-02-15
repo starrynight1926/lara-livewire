@@ -7,25 +7,31 @@ use App\Models\Product;
 
 class ProductCreate extends Component
 {
-    public Product $newProduct; // Biến riêng cho form create
+    public $name = '';
+    public $price = '';
+    public $detail  = '';
 
     public function mount()
     {
-        $this->newProduct = new Product(); // Khởi tạo đối tượng mới
+
     }
 
     public function save()
     {
         $this->validate([
-            'newProduct.name' => 'required|string|max:255', // Validate dữ liệu
-            'newProduct.price' => 'required|numeric',
-            'newProduct.detail' => 'required|string',
+            'name' => 'required|string|max:255', // Validate dữ liệu
+            'price' => 'required|numeric'
         ]);
 
-        $this->newProduct->save(); // Lưu sản phẩm mới
+        Product::create([
+            'name' => $this->name,
+            'price' => $this->price,
+            'detail' => $this->detail
+        ]);
 
         session()->flash('message', 'Product created successfully!');
-        $this->dispatch('productCreated'); // Gửi sự kiện Livewire
+        $this->reset(['name', 'price', 'detail']); // Clear the form
+        $this->dispatch('productAdded'); // Gửi sự kiện Livewire
     }
 
     public function render()

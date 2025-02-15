@@ -10,16 +10,15 @@
 <body class="bg-gray-100 p-6">
     <div class="flex flex-col items-center p-6 space-y-6">
         <h1 class="text-4xl font-bold w-4/5 text-center">Quản lý sản phẩm</h1>
-        
+
         <div class="w-4/5 p-4 shadow rounded-lg">
             @livewire('products.product-create')
         </div>
-        
+
         @livewire('products.datatable-product')
 
-        <div class="w-4/5 p-4 shadow rounded-lg">
-            @livewire('products.product-edit')
-        </div>
+
+        @livewire('products.product-edit')
     </div>
     @livewireScripts
 </body>
