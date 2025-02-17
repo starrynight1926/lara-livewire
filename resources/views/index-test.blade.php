@@ -1,25 +1,19 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý sản phẩm</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    @livewireStyles
+    <title>Bootstrap 4.1 Table</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    @livewireStyles()
 </head>
-<body class="bg-gray-100 p-6">
-    <div class="flex flex-col items-center p-6 space-y-6">
-        <h1 class="text-4xl font-bold w-4/5 text-center">Quản lý sản phẩm</h1>
-
-        <div class="w-4/5 p-4 shadow rounded-lg">
-            @livewire('products.product-create')
-        </div>
-
-        @livewire('products.datatable-product')
-
-
-        @livewire('products.product-edit')
+<body>
+    <div class="container mt-5">
+        <livewire:products.product-list />
     </div>
-    @livewireScripts
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    @livewireScripts()
 </body>
 </html>

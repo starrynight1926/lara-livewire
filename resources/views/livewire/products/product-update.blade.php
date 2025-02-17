@@ -1,9 +1,9 @@
 <div class="card">
     <div class="card-header">
-        Thêm sản phẩm
+        Sửa sản phẩm
     </div>
     <div class="card-body">
-       <form wire:submit.prevent="storeProduct">
+        <form wire:submit="updateDataProduct">
             <div class="mt-2">
                 <label for="name">Tên</label>
                 <input type="text" class="form-control" id="name" wire:model="name">
@@ -14,9 +14,9 @@
                 <label for="detail">Nội dung</label>
                 <input type="text" class="form-control" id="detail" wire:model="detail">
             </div>
-            <button class="btn btn-success mt-3">Thêm</button>
-            <button class="btn btn-cancel mt-3" type="button" wire:click="cancelAdd()">Hủy</button>
-       </form>
+            <button class="btn btn-success mt-3" type="submit">Sửa</button>
+            <button class="btn btn-cancel mt-3" type="button" wire:click="cancelUpdate()">Hủy</button>
+        </form>
         
     </div>
 </div>
